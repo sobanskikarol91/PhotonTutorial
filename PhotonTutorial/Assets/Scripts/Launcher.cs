@@ -5,6 +5,8 @@ using UnityEngine;
 public class Launcher : MonoBehaviourPunCallbacks
 {
     private string gameVersion = "1";
+    private bool isConnecting;
+
     [SerializeField] byte maxPlayersPErRoom = 4;
 
     [Tooltip("The Ui Panel to let the user enter name, connect and play")]
@@ -27,6 +29,7 @@ public class Launcher : MonoBehaviourPunCallbacks
 
     public void Connect()
     {
+        isConnecting = true;
         progressLabel.SetActive(true);
         controlPanel.SetActive(false);
 
@@ -41,8 +44,12 @@ public class Launcher : MonoBehaviourPunCallbacks
 
     public override void OnConnectedToMaster()
     {
-        Debug.Log(" OnConnectedToMaster() was called by PUN");
-        PhotonNetwork.JoinRandomRoom();
+        Debug.Log(" OnConnectedToMaster()");
+
+        if (isConnecting)
+        {
+            PhotonNetwork.JoinRandomRoom();
+        }
     }
 
     public override void OnDisconnected(DisconnectCause cause)

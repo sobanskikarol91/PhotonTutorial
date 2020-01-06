@@ -13,12 +13,7 @@ public class Launcher : MonoBehaviourPunCallbacks
         PhotonNetwork.AutomaticallySyncScene = true;
     }
 
-    private void Start()
-    {
-        Connect();
-    }
-
-    private void Connect()
+    public void Connect()
     {
         if (PhotonNetwork.IsConnected)
             PhotonNetwork.JoinRandomRoom();

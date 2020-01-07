@@ -12,10 +12,11 @@ public class PlayerManager : MonoBehaviourPunCallbacks
 
     [Tooltip("The Beams GameObject to control")]
     [SerializeField]
+    private GameObject beams;
     [Tooltip("The current Health of our player")]
     public float Health = 1f;
 
-    private GameObject beams;
+
     //True, when the user is firing
     bool IsFiring;
     #endregion

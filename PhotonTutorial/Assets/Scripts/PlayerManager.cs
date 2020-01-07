@@ -13,6 +13,7 @@ public class PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
     private GameObject beams;
     [Tooltip("The current Health of our player")]
     public float Health = 1f;
+    [Tooltip("The prefab to use for representing the player")]
 
 
     //True, when the user is firing

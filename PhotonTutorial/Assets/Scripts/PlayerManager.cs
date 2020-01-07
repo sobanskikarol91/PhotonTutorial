@@ -3,6 +3,8 @@ using UnityEngine.EventSystems;
 
 using Photon.Pun;
 using Photon.Pun.Demo.PunBasics;
+using System;
+using UnityEngine.SceneManagement;
 
 public class PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
 {
@@ -58,8 +60,39 @@ public class PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
         {
             Debug.LogError("<Color=Red><a>Missing</a></Color> CameraWork Component on playerPrefab.", this);
         }
+
+#if UNITY_5_4_OR_NEWER
+        // Unity 5.4 has a new scene management. register a method to call CalledOnLevelWasLoaded.
+        UnityEngine.SceneManagement.SceneManager.sceneLoaded += OnSceneLoaded;
+#endif
     }
 
+    void OnSceneLoaded(UnityEngine.SceneManagement.Scene scene, UnityEngine.SceneManagement.LoadSceneMode loadingMode)
+    {
+        this.CalledOnLevelWasLoaded(scene.buildIndex);
+    }
+
+
+    void OnLevelWasLoaded(int level)
+    {
+        this.CalledOnLevelWasLoaded(level);
+    }
+
+    public override void OnDisable()
+    {
+        // Always call the base to remove callbacks
+        base.OnDisable();
+        UnityEngine.SceneManagement.SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    void CalledOnLevelWasLoaded(int level)
+    {
+        // check if we are outside the Arena and if it's the case, spawn around the center of the arena in a safe zone
+        if (!Physics.Raycast(transform.position, -Vector3.up, 5f))
+        {
+            transform.position = new Vector3(0f, 5f, 0f);
+        }
+    }
     /// <summary>
     /// MonoBehaviour method called on GameObject by Unity on every frame.
     /// </summary>
@@ -157,7 +190,7 @@ public class PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
         {
             // Network player, receive data
             this.IsFiring = (bool)stream.ReceiveNext();
-            this.Health = (float)stream.ReceiveNext(); 
+            this.Health = (float)stream.ReceiveNext();
         }
     }
 

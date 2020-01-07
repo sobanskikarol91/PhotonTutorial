@@ -5,6 +5,13 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviourPunCallbacks
 {
+    public static GameManager Instance;
+
+    void Start()
+    {
+        Instance = this;
+    }
+
     public override void OnLeftRoom()
     {
         SceneManager.LoadScene(0);

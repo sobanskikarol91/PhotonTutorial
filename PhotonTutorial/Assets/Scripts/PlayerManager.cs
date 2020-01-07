@@ -12,6 +12,9 @@ public class PlayerManager : MonoBehaviourPunCallbacks
 
     [Tooltip("The Beams GameObject to control")]
     [SerializeField]
+    [Tooltip("The current Health of our player")]
+    public float Health = 1f;
+
     private GameObject beams;
     //True, when the user is firing
     bool IsFiring;
@@ -47,6 +50,11 @@ public class PlayerManager : MonoBehaviourPunCallbacks
         {
             beams.SetActive(IsFiring);
         }
+
+        if (Health <= 0f)
+        {
+            GameManager.Instance.LeaveRoom();
+        }
     }
 
     #endregion
@@ -72,6 +80,42 @@ public class PlayerManager : MonoBehaviourPunCallbacks
                 IsFiring = false;
             }
         }
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (!photonView.IsMine)
+        {
+            return;
+        }
+        // We are only interested in Beamers
+        // we should be using tags but for the sake of distribution, let's simply check by name.
+        if (!other.name.Contains("Beam"))
+        {
+            return;
+        }
+        Health -= 0.1f;
+    }
+    /// <summary>
+    /// MonoBehaviour method called once per frame for every Collider 'other' that is touching the trigger.
+    /// We're going to affect health while the beams are touching the player
+    /// </summary>
+    /// <param name="other">Other.</param>
+    void OnTriggerStay(Collider other)
+    {
+        // we dont' do anything if we are not the local player.
+        if (!photonView.IsMine)
+        {
+            return;
+        }
+        // We are only interested in Beamers
+        // we should be using tags but for the sake of distribution, let's simply check by name.
+        if (!other.name.Contains("Beam"))
+        {
+            return;
+        }
+        // we slowly affect health when beam is constantly hitting us, so player has to move to prevent death.
+        Health -= 0.1f * Time.deltaTime;
     }
 
     #endregion

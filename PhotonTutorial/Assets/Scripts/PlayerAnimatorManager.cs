@@ -3,8 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using Photon.Pun;
 
-public class PlayerAnimatorManager : MonoBehaviour 
+public class PlayerAnimatorManager : MonoBehaviourPun 
 {
     private Animator animator;
 
@@ -23,6 +24,11 @@ public class PlayerAnimatorManager : MonoBehaviour
     private void Update()
     {
         if (!animator)
+        {
+            return;
+        }
+
+        if (photonView.IsMine == false && PhotonNetwork.IsConnected == true)
         {
             return;
         }

@@ -529,31 +529,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1179915599}
   m_CullTransparentMesh: 0
---- !u!1 &1196303999 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4418533588051716241, guid: 227e95dd9f2ad994bab075232bd4c814,
-    type: 3}
-  m_PrefabInstance: {fileID: 3833215442245245104}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1201546511 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4418533588051916601, guid: 227e95dd9f2ad994bab075232bd4c814,
-    type: 3}
-  m_PrefabInstance: {fileID: 3833215442245245104}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1201546512
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1201546511}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 487dbf6b4923e6d4e8f9c90ad77988ad, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  beams: {fileID: 1196303999}
 --- !u!1 &1629151713
 GameObject:
   m_ObjectHideFlags: 0
@@ -895,16 +870,6 @@ PrefabInstance:
         type: 3}
       propertyPath: viewIdField
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4418533588041583685, guid: 227e95dd9f2ad994bab075232bd4c814,
-        type: 3}
-      propertyPath: followOnStart
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4418533588041483501, guid: 227e95dd9f2ad994bab075232bd4c814,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 227e95dd9f2ad994bab075232bd4c814, type: 3}

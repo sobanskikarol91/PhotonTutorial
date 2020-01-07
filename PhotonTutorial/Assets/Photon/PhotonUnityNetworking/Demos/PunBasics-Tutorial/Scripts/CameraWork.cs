@@ -98,6 +98,7 @@ namespace Photon.Pun.Demo.PunBasics
 		{	      
 			cameraTransform = Camera.main.transform;
 			isFollowing = true;
+            Debug.Log("camera following"); 
 			// we don't smooth anything, we go straight to the right camera shot
 			Cut();
 		}
